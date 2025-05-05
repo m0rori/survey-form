@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객 만족도 설문조사</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .survey-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #3366cc;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"], 
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            height: 120px;
+        }
+        .radio-group, .checkbox-group {
+            margin-top: 5px;
+        }
+        .radio-option, .checkbox-option {
+            margin-bottom: 8px;
+        }
+        button {
+            background-color: #3366cc;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+        }
+        button:hover {
+            background-color: #254e9c;
+        }
+        .required::after {
+            content: " *";
+            color: red;
+        }
+        .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+        .rating > input {
+            display: none;
+        }
+        .rating > label {
+            position: relative;
+            width: 30px;
+            font-size: 30px;
+            color: #ddd;
+            cursor: pointer;
+        }
+        .rating > label::before {
+            content: "\2605";
+            position: absolute;
+        }
+        .rating > input:checked ~ label {
+            color: #ffc700;
+        }
+        .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+            color: #ffc700;
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <h1>고객 만족도 설문조사</h1>
+        <form id="surveyForm">
+            <!-- 기본 정보 섹션 -->
+            <div class="form-group">
+                <label for="name" class="required">이름</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="required">이메일</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">연락처</label>
+                <input type="tel" id="phone" name="phone" placeholder="010-1234-5678">
+            </div>
+
+            <div class="form-group">
+                <label for="age">연령대</label>
+                <select id="age" name="age">
+                    <option value="">선택하세요</option>
+                    <option value="10s">10대</option>
+                    <option value="20s">20대</option>
+                    <option value="30s">30대</option>
+                    <option value="40s">40대</option>
+                    <option value="50s">50대</option>
+                    <option value="60+">60대 이상</option>
+                </select>
+            </div>
+
+            <!-- 서비스 평가 섹션 -->
+            <div class="form-group">
+                <label class="required">전반적인 서비스 만족도</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="satisfaction" value="5" required>
+                    <label for="star5" title="매우 만족"></label>
+                    <input type="radio" id="star4" name="satisfaction" value="4">
+                    <label for="star4" title="만족"></label>
+                    <input type="radio" id="star3" name="satisfaction" value="3">
+                    <label for="star3" title="보통"></label>
+                    <input type="radio" id="star2" name="satisfaction" value="2">
+                    <label for="star2" title="불만족"></label>
+                    <input type="radio" id="star1" name="satisfaction" value="1">
+                    <label for="star1" title="매우 불만족"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="required">서비스를 이용한 목적</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="purpose1" name="purpose" value="business" required>
+                        <label for="purpose1">업무/비즈니스</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="purpose2" name="purpose" value="personal">
+                        <label for="purpose2">개인 사용</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="purpose3" name="purpose" value="education">
+                        <label for="purpose3">교육/학습</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="purpose4" name="purpose" value="other">
+                        <label for="purpose4">기타</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>가장 만족스러웠던 부분 (해당되는 모든 항목 선택)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="satisfaction1" name="satisfaction_points" value="quality">
+                        <label for="satisfaction1">서비스 품질</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="satisfaction2" name="satisfaction_points" value="price">
+                        <label for="satisfaction2">가격</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="satisfaction3" name="satisfaction_points" value="customer_service">
+                        <label for="satisfaction3">고객 서비스</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="satisfaction4" name="satisfaction_points" value="speed">
+                        <label for="satisfaction4">처리 속도</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="satisfaction5" name="satisfaction_points" value="ease_of_use">
+                        <label for="satisfaction5">사용 편의성</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>개선이 필요한 부분 (해당되는 모든 항목 선택)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="improvement1" name="improvement_points" value="quality">
+                        <label for="improvement1">서비스 품질</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="improvement2" name="improvement_points" value="price">
+                        <label for="improvement2">가격</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="improvement3" name="improvement_points" value="customer_service">
+                        <label for="improvement3">고객 서비스</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="improvement4" name="improvement_points" value="speed">
+                        <label for="improvement4">처리 속도</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="improvement5" name="improvement_points" value="ease_of_use">
+                        <label for="improvement5">사용 편의성</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="suggestions">의견 및 제안사항</label>
+                <textarea id="suggestions" name="suggestions" placeholder="서비스 개선을 위한 의견이나 제안사항을 자유롭게 작성해 주세요."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="recommendation">다른 사람에게 우리 서비스를 추천할 의향이 있으신가요?</label>
+                <select id="recommendation" name="recommendation">
+                    <option value="">선택하세요</option>
+                    <option value="definitely">매우 그렇다</option>
+                    <option value="probably">그렇다</option>
+                    <option value="maybe">아마도</option>
+                    <option value="probably_not">아니다</option>
+                    <option value="definitely_not">전혀 아니다</option>
+                </select>
+            </div>
+
+            <button type="submit">제출하기</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // 폼 데이터 수집
+            const formData = new FormData(this);
+            let formValues = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (formValues[key]) {
+                    if (!Array.isArray(formValues[key])) {
+                        formValues[key] = [formValues[key]];
+                    }
+                    formValues[key].push(value);
+                } else {
+                    formValues[key] = value;
+                }
+            }
+            
+            // 실제 서버 제출 로직은 여기에 구현
+            // 여기서는 단순히 콘솔에 데이터를 출력하고 감사 메시지 표시
+            console.log('제출된 설문 데이터:', formValues);
+            
+            alert('설문에 참여해주셔서 감사합니다!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
